@@ -2,7 +2,7 @@ import './globals.css'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
 import BackToTop from '@/components/BackToTop/BackToTop'
-
+import Download from '@/components/Download/Download'
 export const metadata = {
   title: 'AjiApp - Your Guide to Morocco',
   description: 'A travel guide app that helps users plan their trip in Morocco.',
@@ -16,8 +16,10 @@ export default function RootLayout({ children }) {
         <div className="app">
           <Header />
           <main>{children}</main>
+          <Download />
           <Footer />
           <BackToTop />
+
         </div>
       </body>
     </html>

@@ -69,65 +69,9 @@ export default function BlogPage() {
             </Link>
           </div>
 
-          {/* Placeholder for future articles */}
-          <div className="blog-card-wrapper">
-            <article className="blog-card" style={{ opacity: 0.6, pointerEvents: 'none' }}>
-              <div className="blog-card-image">
-                <Image 
-                  src="/assets/blog/Fes-medina.webp"
-                  alt="Coming Soon"
-                  width={500}
-                  height={280}
-                  className="blog-card-img"
-                />
-                <div className="blog-category">Coming Soon</div>
-              </div>
-              
-              <div className="blog-card-content">
-                <div className="blog-meta">
-                  <span className="blog-date">February 2025</span>
-                  <span className="blog-read-time">City Guide</span>
-                </div>
-                
-                <h2 className="blog-card-title">Fes: Morocco's Cultural Capital</h2>
-                
-                <p className="blog-card-excerpt">
-                  Explore the ancient medina of Fes, discover traditional crafts, 
-                  and immerse yourself in centuries of history and culture.
-                </p>
-
-                <div className="blog-card-tags">
-                  <span className="tag">Fes</span>
-                  <span className="tag">Culture</span>
-                  <span className="tag">History</span>
-                </div>
-
-                <div className="blog-card-cta">
-                  <span className="read-more">Coming Soon</span>
-                </div>
-              </div>
-            </article>
-          </div>
+         
         </div>
 
-        {/* Newsletter Section */}
-        <section className="newsletter-section">
-          <h2 className="newsletter-title">Stay Updated</h2>
-          <p className="newsletter-description">
-            Get the latest travel guides and Morocco insights delivered to your inbox.
-          </p>
-          <form className="newsletter-form">
-            <input 
-              type="email" 
-              placeholder="Enter your email address"
-              className="newsletter-input"
-              required
-            />
-            <button type="submit" className="newsletter-button">
-              Subscribe
-            </button>
-          </form>
-        </section>
       </main>
     </div>
   )

@@ -83,7 +83,7 @@ body.page-transitioning {
 }
 
 .header.scrolled .header-logo img {
-  height: 65px;
+  height: 75px;
 }
 
 .header-logo a {
@@ -123,9 +123,9 @@ body.page-transitioning {
 
 .header-nav ul li a {
   text-decoration: none;
-  color: #333;
+  color: #000000;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.15rem;
   padding: 0.5rem 0;
   transition: all 0.3s ease;
   position: relative;

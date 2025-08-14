@@ -41,14 +41,8 @@ export default function BlogPost() {
 
   return (
     <div className="blog-post-container">
-      {/* Breadcrumb */}
-      <nav className="blog-post-breadcrumb">
-        <Link href="/blog">Blog</Link>
-        <span>›</span>
-        <span>Travel Guide</span>
-        <span>›</span>
-        <span>Morocco Guide</span>
-      </nav>
+
+    
 
       {/* Article Header */}
       <header className="blog-post-hero">

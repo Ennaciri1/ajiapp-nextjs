@@ -58,11 +58,12 @@ export default function BlogPost() {
           fill
           style={{ objectFit: 'cover' }}
           className="blog-post-hero-image"
+          priority
         />
         <div className="blog-post-hero-overlay">
           <div className="blog-post-hero-content">
             <div className="blog-post-category">Travel Guide</div>
-            <h1 className="blog-post-title">About Morocco – Travel Guide</h1>
+            <h1 className="blog-post-title">About Morocco — Travel Guide</h1>
             <div className="blog-post-meta">
               <span className="blog-post-author">By AJI Team</span>
               <span>•</span>
@@ -129,7 +130,7 @@ export default function BlogPost() {
 
           {/* Geography */}
           <div className="article-section" id="geography">
-            <h3>Geography of Morocco – Natural Beauty & Landscapes</h3>
+            <h3>Geography of Morocco — Natural Beauty & Landscapes</h3>
             <ul className="info-list">
               <li>Morocco has coastlines on both the Atlantic Ocean and the Mediterranean Sea, totaling around 3,500 km</li>
               <li><strong>Diverse geography includes:</strong></li>
@@ -183,7 +184,7 @@ export default function BlogPost() {
 
           {/* Currency */}
           <div className="article-section" id="currency">
-            <h3>Currency in Morocco – Moroccan Dirham (MAD)</h3>
+            <h3>Currency in Morocco — Moroccan Dirham (MAD)</h3>
             <div className="article-image">
               <Image 
                 src="/assets/blog/Moroccan-dirham-banknote-and-coins.webp"
@@ -208,7 +209,7 @@ export default function BlogPost() {
 
           {/* Languages */}
           <div className="article-section" id="languages">
-            <h3>Languages Spoken in Morocco – Communication Tips</h3>
+            <h3>Languages Spoken in Morocco — Communication Tips</h3>
             <ul className="info-list">
               <li>The main language is Moroccan Arabic (Darija)</li>
               <li>French in Morocco is widely spoken</li>
@@ -220,7 +221,7 @@ export default function BlogPost() {
 
           {/* Royal Family */}
           <div className="article-section" id="royal-family">
-            <h3>The Kingdom of Morocco – Royal Family & History</h3>
+            <h3>The Kingdom of Morocco — Royal Family & History</h3>
             <div className="article-image">
               <Image 
                 src="/assets/blog/King-mohamed-VI, Moulay-Hassan-and-Moulay-Rachid.webp"
@@ -240,7 +241,7 @@ export default function BlogPost() {
 
           {/* Culture */}
           <div className="article-section" id="culture">
-            <h3>Moroccan Culture – Traditions & Identity</h3>
+            <h3>Moroccan Culture — Traditions & Identity</h3>
             <p>
               Morocco has a vibrant, multicultural identity shaped by Arab, Berber, African, 
               Andalusian, and French influences.
@@ -262,8 +263,8 @@ export default function BlogPost() {
 
             <h4>Traditional Moroccan Clothing</h4>
             <ul className="info-list">
-              <li><strong>Djellaba</strong> – traditional robe worn by men and women</li>
-              <li><strong>Caftan</strong> – ornate dress worn by women for special occasions</li>
+              <li><strong>Djellaba</strong> — traditional robe worn by men and women</li>
+              <li><strong>Caftan</strong> — ornate dress worn by women for special occasions</li>
               <li>Traditional clothing reflects Moroccan heritage and cultural pride</li>
             </ul>
 
@@ -288,29 +289,29 @@ export default function BlogPost() {
               <figcaption>Fes Medina or Ait Ben Haddou</figcaption>
             </div>
             <ul className="info-list">
-              <li><strong>Fes el-Bali</strong> – ancient medina of Fes, car-free with markets and madrasas</li>
-              <li><strong>Ait Ben Haddou</strong> – clay village featured in Hollywood movies</li>
-              <li><strong>Marrakech Medina</strong> – historic center with souks, palaces, and mosques</li>
-              <li><strong>Volubilis</strong> – well-preserved Roman ruins with mosaics</li>
-              <li><strong>Essaouira</strong> – coastal town with fortifications and art culture</li>
+              <li><strong>Fes el-Bali</strong> — ancient medina of Fes, car-free with markets and madrasas</li>
+              <li><strong>Ait Ben Haddou</strong> — clay village featured in Hollywood movies</li>
+              <li><strong>Marrakech Medina</strong> — historic center with souks, palaces, and mosques</li>
+              <li><strong>Volubilis</strong> — well-preserved Roman ruins with mosaics</li>
+              <li><strong>Essaouira</strong> — coastal town with fortifications and art culture</li>
             </ul>
           </div>
 
           {/* Cuisine */}
           <div className="article-section" id="cuisine">
-            <h3>What to Eat in Morocco – Traditional Moroccan Cuisine</h3>
+            <h3>What to Eat in Morocco — Traditional Moroccan Cuisine</h3>
             <ul className="info-list">
-              <li><strong>Tagine</strong> – slow-cooked stew with meat, chicken, or vegetables</li>
-              <li><strong>Couscous Morocco</strong> – served with vegetables and meat, a Friday favorite</li>
-              <li><strong>Pastilla</strong> – layered pastry with chicken or seafood, sweet and savory</li>
-              <li><strong>Harira soup</strong> – made with lentils, chickpeas, tomatoes, and herbs</li>
-              <li><strong>Mint tea</strong> – national drink and sign of hospitality</li>
+              <li><strong>Tagine</strong> — slow-cooked stew with meat, chicken, or vegetables</li>
+              <li><strong>Couscous Morocco</strong> — served with vegetables and meat, a Friday favorite</li>
+              <li><strong>Pastilla</strong> — layered pastry with chicken or seafood, sweet and savory</li>
+              <li><strong>Harira soup</strong> — made with lentils, chickpeas, tomatoes, and herbs</li>
+              <li><strong>Mint tea</strong> — national drink and sign of hospitality</li>
             </ul>
 
             <h4>Moroccan sweets:</h4>
             <ul className="info-list">
-              <li><strong>Shebakia</strong> – fried pastry dipped in honey</li>
-              <li><strong>Briwat</strong> – sweet or savory stuffed pastries</li>
+              <li><strong>Shebakia</strong> — fried pastry dipped in honey</li>
+              <li><strong>Briwat</strong> — sweet or savory stuffed pastries</li>
             </ul>
 
             <div className="image-grid cuisine-grid">

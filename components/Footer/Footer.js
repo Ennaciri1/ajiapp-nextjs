@@ -6,7 +6,7 @@ export default function Footer() {
     <footer id="footer" className="aji-footer">
       <div className="footer-logo">
         <Image 
-          src="/assets/logoWhite.svg" 
+          src="/assets/logos/logoWhite.svg" 
           alt="AJI logo" 
           width={90}
           height={60}
@@ -16,7 +16,7 @@ export default function Footer() {
       <div className="footer-content">
         <div className="footer-left">
           <Image 
-            src="/assets/email-icon.svg" 
+            src="/assets/icons/email-icon.svg" 
             alt="email icon" 
             width={44}
             height={44}

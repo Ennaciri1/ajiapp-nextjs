@@ -58,7 +58,7 @@ html, body {
 
 /* Main App Container */
 .app {
-  background: url('/assets/backround.svg') center;
+  background: url('/assets/images/backround.svg') center;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

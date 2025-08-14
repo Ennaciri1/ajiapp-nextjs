@@ -1,0 +1,71 @@
+.back-to-top-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: #8b181a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(139, 24, 26, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.back-to-top-button:hover {
+  background: #a32123;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(139, 24, 26, 0.4);
+}
+
+.back-to-top-button:active {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .back-to-top-button {
+    width: 55px;
+    height: 55px;
+    bottom: 25px;
+    right: 25px;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .back-to-top-button {
+    width: 50px;
+    height: 50px;
+    bottom: 20px;
+    right: 20px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .back-to-top-button {
+    width: 45px;
+    height: 45px;
+    bottom: 15px;
+    right: 15px;
+    font-size: 18px;
+  }
+}

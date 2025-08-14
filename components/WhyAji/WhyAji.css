@@ -1,0 +1,184 @@
+/*    SECTION PRINCIPALE */
+.why-aji-section {
+  padding: 4rem 1rem;
+  position: relative;
+  overflow: hidden; /* Prevent overflow from negative margins */
+}
+
+/*    CONTENEUR INTERNE */
+.why-aji-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* TITRE PRINCIPAL - reduced from 5rem to 3.5rem */
+.why-aji-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  display: inline-block;
+}
+
+/* Add underline effect to title */
+.why-aji-title:after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  background-color: #8B181A;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* SOUS-TITRE */
+.why-aji-subtitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+/* DESCRIPTION */
+.why-aji-subdesc {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 3rem; /* Increased bottom margin */
+  color: #666;
+}
+
+/*    CONTENEUR DES IMAGES */
+.phone-images {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* PHONE IMAGE - Remove extreme negative margins */
+.phone-image {
+  width: 100%;
+  max-width: 1000px; /* Reduced from 1000px */
+  height: auto;
+  margin-bottom: -6rem; /* Reduced from -10rem */
+  margin-top: -6rem; /* Reduced from -9rem */
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1)); /* Add subtle shadow */
+}
+
+/* ======================= MEDIA QUERIES ======================= */
+
+/* Large Tablets (iPad Pro, etc.) */
+@media (max-width: 1024px) {
+  .phone-image {
+    max-width: 700px;
+    margin-top: -4rem;
+    margin-bottom: -4rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .why-aji-section {
+    padding: 3rem 1rem;
+  }
+  
+  .why-aji-title {
+    font-size: 2.5rem;
+  }
+  
+  .why-aji-subtitle {
+    font-size: 1.5rem;
+  }
+  
+  .why-aji-subdesc {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .phone-image {
+    max-width: 500px; /* Taille tablette */
+    width: 85%; /* Responsive width */
+    margin-top: -2rem;
+    margin-bottom: -3rem;
+  }
+}
+
+/* Large Mobile (iPhone Plus, etc.) */
+@media (max-width: 600px) {
+  .phone-image {
+    max-width: 420px; /* Taille pour grands mobiles */
+    width: 90%; /* Plus large sur grands mobiles */
+    margin-top: -1.5rem;
+    margin-bottom: -2.5rem;
+  }
+}
+
+/* Mobile Standard */
+@media (max-width: 480px) {
+  .why-aji-section {
+    padding: 2rem 1rem; /* Ajusté pour mobile */
+    top: -60px; /* Adjusted for better alignment */
+    }
+    .why-aji-section {
+    padding: 2rem 1rem; /* Ajusté pour mobile */
+    top: -60px; /* Adjusted for better alignment */
+  }
+  
+  .why-aji-title {
+    font-size: 2rem;
+  }
+  
+  .why-aji-subtitle {
+    font-size: 1.3rem;
+  }
+  
+  .why-aji-subdesc {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .phone-image {
+    max-width: 360px; /* Taille mobile standard */
+    width: 95%; /* Presque pleine largeur */
+    margin-top: -1rem;
+    margin-bottom: -2rem;
+  }
+}
+
+/* Small Mobile (iPhone SE, etc.) */
+@media (max-width: 400px) {
+  .phone-image {
+    max-width: 360px; /* Plus petit pour petits écrans */
+    width: 440%; /* Presque pleine largeur */
+    margin-top: -0.5rem;
+    margin-bottom: -1.5rem;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 320px) {
+  .why-aji-section {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .why-aji-title {
+    font-size: 1.8rem;
+  }
+  
+  .why-aji-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .phone-image {
+    max-width: 280px; /* Très petit pour écrans étroits */
+    width: 100%; /* Pleine largeur */
+    margin-top: 0;
+    margin-bottom: -1rem;
+  }
+}

@@ -2,10 +2,25 @@ import Link from 'next/link'
 import Image from 'next/image'
 import '@/components/Blog/Blog.css'
 
+// Metadata pour la page blog
 export const metadata = {
   title: 'Morocco Travel Guide | AjiApp Blog',
   description: 'Discover the magic of Morocco through our comprehensive travel guide. Learn about culture, geography, cuisine, and practical travel tips.',
   keywords: ['Morocco travel guide', 'Morocco tourism', 'Travel Morocco', 'Morocco culture', 'Morocco destinations'],
+  openGraph: {
+    title: 'Morocco Travel Guide | AjiApp Blog',
+    description: 'Discover the magic of Morocco through our comprehensive travel guide.',
+    url: 'https://ajiapp.com/blog',
+    type: 'website',
+  },
+}
+
+// Viewport spécifique pour la page blog (optionnel)
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 3, // Limité pour le blog
+  userScalable: true,
 }
 
 export default function BlogPage() {
@@ -18,7 +33,6 @@ export default function BlogPage() {
             Your ultimate travel companion for exploring the beauty, culture, and adventures 
             that Morocco has to offer. From ancient medinas to desert dunes.
           </p>
-         
         </div>
       </header>
 
@@ -68,10 +82,7 @@ export default function BlogPage() {
               </article>
             </Link>
           </div>
-
-         
         </div>
-
       </main>
     </div>
   )

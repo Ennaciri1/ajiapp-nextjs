@@ -1,18 +1,19 @@
-/*    SECTION PRINCIPALE */
+/* WHY AJI SECTION - Version Corrigée */
 .why-aji-section {
   padding: 4rem 1rem;
   position: relative;
-  overflow: hidden; /* Prevent overflow from negative margins */
+  overflow: hidden;
+  width: 100%;
 }
 
-/*    CONTENEUR INTERNE */
+/* CONTENEUR INTERNE */
 .why-aji-container {
   max-width: 1280px;
   margin: 0 auto;
   text-align: center;
 }
 
-/* TITRE PRINCIPAL - reduced from 5rem to 3.5rem */
+/* TITRE PRINCIPAL */
 .why-aji-title {
   font-size: 3.5rem;
   font-weight: 700;
@@ -24,7 +25,7 @@
   display: inline-block;
 }
 
-/* Add underline effect to title */
+/* Underline effect */
 .why-aji-title:after {
   content: '';
   position: absolute;
@@ -49,36 +50,71 @@
   font-size: 1.125rem;
   line-height: 1.6;
   max-width: 800px;
-  margin: 0 auto 3rem; /* Increased bottom margin */
+  margin: 0 auto 3rem;
   color: #666;
 }
 
-/*    CONTENEUR DES IMAGES */
+/* CONTENEUR DES IMAGES */
 .phone-images {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+  width: 100%;
 }
 
-/* PHONE IMAGE - Remove extreme negative margins */
+/* PHONE IMAGE - Marges corrigées */
 .phone-image {
   width: 100%;
-  max-width: 1000px; /* Reduced from 1000px */
+  max-width: 900px;
   height: auto;
-  margin-bottom: -6rem; /* Reduced from -10rem */
-  margin-top: -6rem; /* Reduced from -9rem */
-  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1)); /* Add subtle shadow */
+  margin: 0 auto;
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+  display: block;
 }
 
 /* ======================= MEDIA QUERIES ======================= */
 
+/* Large Desktop */
+@media (min-width: 1600px) {
+  .why-aji-title {
+    font-size: 4rem;
+  }
+  
+  .why-aji-subtitle {
+    font-size: 2rem;
+  }
+  
+  .why-aji-subdesc {
+    font-size: 1.3rem;
+  }
+  
+  .phone-image {
+    max-width: 1000px;
+  }
+}
+
 /* Large Tablets (iPad Pro, etc.) */
 @media (max-width: 1024px) {
+  .why-aji-section {
+    padding: 3rem 1rem;
+  }
+  
+  .why-aji-title {
+    font-size: 3rem;
+  }
+  
+  .why-aji-subtitle {
+    font-size: 1.6rem;
+  }
+  
+  .why-aji-subdesc {
+    font-size: 1.1rem;
+  }
+  
   .phone-image {
     max-width: 700px;
-    margin-top: -4rem;
-    margin-bottom: -4rem;
+    width: 95%;
   }
 }
 
@@ -102,36 +138,40 @@
   }
   
   .phone-image {
-    max-width: 500px; /* Taille tablette */
-    width: 85%; /* Responsive width */
-    margin-top: -2rem;
-    margin-bottom: -3rem;
+    max-width: 500px;
+    width: 90%;
   }
 }
 
 /* Large Mobile (iPhone Plus, etc.) */
 @media (max-width: 600px) {
+  .why-aji-section {
+    padding: 2.5rem 1rem;
+  }
+  
+  .why-aji-title {
+    font-size: 2.2rem;
+  }
+  
+  .why-aji-subtitle {
+    font-size: 1.4rem;
+  }
+  
   .phone-image {
-    max-width: 420px; /* Taille pour grands mobiles */
-    width: 90%; /* Plus large sur grands mobiles */
-    margin-top: -1.5rem;
-    margin-bottom: -2.5rem;
+    max-width: 420px;
+    width: 95%;
   }
 }
 
 /* Mobile Standard */
 @media (max-width: 480px) {
   .why-aji-section {
-    padding: 2rem 1rem; /* Ajusté pour mobile */
-    top: -60px; /* Adjusted for better alignment */
-    }
-    .why-aji-section {
-    padding: 2rem 1rem; /* Ajusté pour mobile */
-    top: -60px; /* Adjusted for better alignment */
+    padding: 2rem 1rem;
   }
   
   .why-aji-title {
     font-size: 2rem;
+    letter-spacing: 0.05em;
   }
   
   .why-aji-subtitle {
@@ -141,30 +181,25 @@
   .why-aji-subdesc {
     font-size: 0.95rem;
     margin-bottom: 1.5rem;
+    line-height: 1.5;
   }
   
   .phone-image {
-    max-width: 360px; /* Taille mobile standard */
-    width: 95%; /* Presque pleine largeur */
-    margin-top: -1rem;
-    margin-bottom: -2rem;
+    max-width: 350px;
+    width: 100%;
+  }
+  
+  .why-aji-title:after {
+    width: 40px;
+    height: 2px;
+    bottom: -8px;
   }
 }
 
 /* Small Mobile (iPhone SE, etc.) */
 @media (max-width: 400px) {
-  .phone-image {
-    max-width: 360px; /* Plus petit pour petits écrans */
-    width: 440%; /* Presque pleine largeur */
-    margin-top: -0.5rem;
-    margin-bottom: -1.5rem;
-  }
-}
-
-/* Very Small Screens */
-@media (max-width: 320px) {
   .why-aji-section {
-    padding: 1.5rem 0.5rem;
+    padding: 1.5rem 0.8rem;
   }
   
   .why-aji-title {
@@ -175,10 +210,68 @@
     font-size: 1.2rem;
   }
   
+  .why-aji-subdesc {
+    font-size: 0.9rem;
+  }
+  
   .phone-image {
-    max-width: 280px; /* Très petit pour écrans étroits */
-    width: 100%; /* Pleine largeur */
-    margin-top: 0;
-    margin-bottom: -1rem;
+    max-width: 300px;
+    width: 100%;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 320px) {
+  .why-aji-section {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .why-aji-title {
+    font-size: 1.6rem;
+  }
+  
+  .why-aji-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .why-aji-subdesc {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  
+  .phone-image {
+    max-width: 280px;
+    width: 100%;
+  }
+  
+  .why-aji-title:after {
+    width: 30px;
+    height: 2px;
+  }
+}
+
+/* Smooth animations for better UX */
+@media (prefers-reduced-motion: no-preference) {
+  .phone-image {
+    transition: transform 0.3s ease;
+  }
+  
+  .phone-image:hover {
+    transform: scale(1.02);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .why-aji-title {
+    color: #000;
+  }
+  
+  .why-aji-subtitle {
+    color: #222;
+  }
+  
+  .why-aji-subdesc {
+    color: #333;
   }
 }

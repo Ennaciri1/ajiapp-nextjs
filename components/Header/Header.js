@@ -9,10 +9,18 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isHeaderVisible, setIsHeaderVisible] = useState(true)
+  const [isClient, setIsClient] = useState(false)
   const pathname = usePathname()
+
+  // Fix hydration mismatch
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   // Custom smooth scroll function
   const smoothScrollTo = useCallback((target, isTop = false) => {
+    if (!isClient) return
+    
     setMobileMenuOpen(false)
     
     if (pathname !== '/') {
@@ -62,10 +70,12 @@ export default function Header() {
     }
     
     setTimeout(scrollToTarget, 100)
-  }, [pathname])
+  }, [pathname, isClient])
 
   // Handle scroll effects
   useEffect(() => {
+    if (!isClient) return
+
     let lastScrollY = window.scrollY
     let ticking = false
 
@@ -95,10 +105,12 @@ export default function Header() {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [isClient])
 
   // Handle resize
   useEffect(() => {
+    if (!isClient) return
+
     const handleResize = () => {
       if (window.innerWidth > 768 && mobileMenuOpen) {
         setMobileMenuOpen(false)
@@ -107,10 +119,12 @@ export default function Header() {
 
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [mobileMenuOpen])
+  }, [mobileMenuOpen, isClient])
 
   // Block scroll when mobile menu is open
   useEffect(() => {
+    if (!isClient) return
+
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden'
     } else {
@@ -120,10 +134,12 @@ export default function Header() {
     return () => {
       document.body.style.overflow = 'unset'
     }
-  }, [mobileMenuOpen])
+  }, [mobileMenuOpen, isClient])
 
   // Escape key to close menu
   useEffect(() => {
+    if (!isClient) return
+
     const handleEscapeKey = (event) => {
       if (event.keyCode === 27 && mobileMenuOpen) {
         setMobileMenuOpen(false)
@@ -137,12 +153,13 @@ export default function Header() {
     return () => {
       document.removeEventListener('keydown', handleEscapeKey)
     }
-  }, [mobileMenuOpen])
+  }, [mobileMenuOpen, isClient])
 
   // Handle page load
   useEffect(() => {
+    if (!isClient) return
     document.body.classList.remove('page-transitioning')
-  }, [])
+  }, [isClient])
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
@@ -156,12 +173,52 @@ export default function Header() {
     e.preventDefault()
     closeMobileMenu()
     
+    if (!isClient) return
+    
     document.body.classList.add('page-transitioning')
     
     setTimeout(() => {
       window.location.href = targetPath
     }, 300)
-  }, [closeMobileMenu])
+  }, [closeMobileMenu, isClient])
+
+  // Don't render interactive elements until client-side
+  if (!isClient) {
+    return (
+      <header className="header">
+        <div className="container">
+          <div className="header-logo">
+            <Link href="/">
+              <Image 
+                src="/assets/logos/aji-logo.svg" 
+                alt="Aji" 
+                width={80}
+                height={80}
+                priority
+              />
+            </Link>
+          </div>
+
+          <nav className="header-nav" role="navigation" aria-label="Navigation principale">
+            <ul>
+              <li><Link href="/#top">Why Aji</Link></li>
+              <li><Link href="/#howitworks">How It Works</Link></li>
+              <li><Link href="/#services">Services</Link></li>
+              <li><Link href="/blog">Blog</Link></li>
+              <li><Link href="/#download">Download</Link></li>
+              <li><Link href="/#footer">Contact</Link></li>
+            </ul>
+          </nav>
+
+          <div className="header-cta">
+            <Link href="/#download" className="btn">
+              <span>Download App</span>
+            </Link>
+          </div>
+        </div>
+      </header>
+    )
+  }
 
   return (
     <>
@@ -174,6 +231,7 @@ export default function Header() {
                 alt="Aji" 
                 width={80}
                 height={80}
+                priority
               />
             </Link>
           </div>

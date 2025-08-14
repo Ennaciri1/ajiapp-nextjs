@@ -1,0 +1,94 @@
+.account-deletion-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  align-items: center;
+}
+
+.account-deletion-container {
+  max-width: 800px;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  line-height: 1.7;
+}
+
+.account-deletion-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #8B181A;
+  text-align: center;
+  font-weight: 700;
+}
+
+.account-deletion-container h2 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #8B181A;
+  font-weight: 600;
+}
+
+.account-deletion-container p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.account-deletion-container a {
+  color: #8B181A;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.account-deletion-container a:hover {
+  color: #a32123;
+  text-decoration: underline;
+}
+
+.account-deletion-container strong {
+  color: #8B181A;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .account-deletion-wrapper {
+    padding: 1rem;
+  }
+  
+  .account-deletion-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .account-deletion-container h1 {
+    font-size: 2rem;
+  }
+
+  .account-deletion-container h2 {
+    font-size: 1.3rem;
+  }
+  
+  .account-deletion-container p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .account-deletion-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .account-deletion-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .account-deletion-container h2 {
+    font-size: 1.2rem;
+  }
+}

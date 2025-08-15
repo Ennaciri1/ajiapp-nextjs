@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -8,162 +8,139 @@ import { usePathname } from 'next/navigation'
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true)
   const [isClient, setIsClient] = useState(false)
   const pathname = usePathname()
+  const headerRef = useRef(null)
 
-  // Fix hydration mismatch
+  // Client-side hydration fix
   useEffect(() => {
     setIsClient(true)
   }, [])
 
-  // Custom smooth scroll function
+  // Stable smooth scroll function
   const smoothScrollTo = useCallback((target, isTop = false) => {
     if (!isClient) return
     
+    // Close mobile menu immediately
     setMobileMenuOpen(false)
     
+    // Handle external pages
     if (pathname !== '/') {
-      document.body.classList.add('page-transitioning')
-      setTimeout(() => {
-        window.location.href = `/#${target}`
-      }, 300)
+      window.location.href = `/#${target}`
       return
     }
     
-    const scrollToTarget = () => {
-      const currentPosition = window.pageYOffset
-      let targetPosition
-      
-      if (isTop) {
-        targetPosition = 0
-      } else {
-        const element = document.getElementById(target)
-        if (!element) return
-        const headerOffset = 100
-        const elementPosition = element.getBoundingClientRect().top
-        targetPosition = elementPosition + window.pageYOffset - headerOffset
-      }
-      
-      const distance = targetPosition - currentPosition
-      const duration = 1000
-      let start = null
-      
-      const animation = (currentTime) => {
-        if (start === null) start = currentTime
-        const timeElapsed = currentTime - start
-        const progress = Math.min(timeElapsed / duration, 1)
-        
-        const easeInOutCubic = (t) => {
-          return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
-        }
-        
-        const easedProgress = easeInOutCubic(progress)
-        window.scrollTo(0, currentPosition + distance * easedProgress)
-        
-        if (progress < 1) {
-          requestAnimationFrame(animation)
-        }
-      }
-      
-      requestAnimationFrame(animation)
+    // Scroll to top
+    if (isTop) {
+      window.scrollTo({ 
+        top: 0, 
+        behavior: 'smooth' 
+      })
+      return
     }
-    
-    setTimeout(scrollToTarget, 100)
+
+    // Scroll to element with stable offset
+    const element = document.getElementById(target)
+    if (element) {
+      const headerHeight = headerRef.current?.offsetHeight || 70
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 10
+
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: 'smooth'
+      })
+    }
   }, [pathname, isClient])
 
-  // Handle scroll effects
+  // Stable scroll handler with throttling
   useEffect(() => {
     if (!isClient) return
 
-    let lastScrollY = window.scrollY
     let ticking = false
 
     const handleScroll = () => {
-      const scrollPosition = window.scrollY
-      
       if (!ticking) {
         requestAnimationFrame(() => {
-          setIsScrolled(scrollPosition > 50)
-          
-          if (scrollPosition > lastScrollY && scrollPosition > 100) {
-            setIsHeaderVisible(false)
-          } else {
-            setIsHeaderVisible(true)
-          }
-          
-          lastScrollY = scrollPosition
+          const scrolled = window.pageYOffset > 20
+          setIsScrolled(scrolled)
           ticking = false
         })
         ticking = true
       }
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    // Initial check
     handleScroll()
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
+    
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [isClient])
 
-  // Handle resize
+  // Handle window resize - stable
   useEffect(() => {
     if (!isClient) return
 
     const handleResize = () => {
+      // Close mobile menu on desktop resize
       if (window.innerWidth > 768 && mobileMenuOpen) {
         setMobileMenuOpen(false)
       }
     }
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize, { passive: true })
     return () => window.removeEventListener('resize', handleResize)
   }, [mobileMenuOpen, isClient])
 
-  // Block scroll when mobile menu is open
+  // Stable body scroll lock
   useEffect(() => {
     if (!isClient) return
 
     if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
+      // Save current scroll position
+      const scrollY = window.pageYOffset
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.width = '100%'
     } else {
-      document.body.style.overflow = 'unset'
+      // Restore scroll position
+      const scrollY = document.body.style.top
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1)
+      }
     }
 
     return () => {
-      document.body.style.overflow = 'unset'
+      // Cleanup on unmount
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
     }
   }, [mobileMenuOpen, isClient])
 
-  // Escape key to close menu
+  // Handle escape key - stable
   useEffect(() => {
-    if (!isClient) return
+    if (!isClient || !mobileMenuOpen) return
 
-    const handleEscapeKey = (event) => {
-      if (event.keyCode === 27 && mobileMenuOpen) {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
         setMobileMenuOpen(false)
       }
     }
 
-    if (mobileMenuOpen) {
-      document.addEventListener('keydown', handleEscapeKey)
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey)
-    }
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
   }, [mobileMenuOpen, isClient])
 
-  // Handle page load
-  useEffect(() => {
-    if (!isClient) return
-    document.body.classList.remove('page-transitioning')
-  }, [isClient])
-
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen)
-  }
+  // Stable event handlers
+  const toggleMobileMenu = useCallback((e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setMobileMenuOpen(prev => !prev)
+  }, [])
 
   const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false)
@@ -173,46 +150,60 @@ export default function Header() {
     e.preventDefault()
     closeMobileMenu()
     
-    if (!isClient) return
-    
-    document.body.classList.add('page-transitioning')
-    
+    // Small delay to ensure menu closes
     setTimeout(() => {
       window.location.href = targetPath
-    }, 300)
-  }, [closeMobileMenu, isClient])
+    }, 100)
+  }, [closeMobileMenu])
 
-  // Don't render interactive elements until client-side
+  // Navigation items
+  const navItems = [
+    { id: 'top', label: 'Why Aji', isTop: true },
+    { id: 'howitworks', label: 'How It Works' },
+    { id: 'services', label: 'Services' },
+    { id: 'blog', label: 'Blog', isExternal: true, href: '/blog' },
+    { id: 'download', label: 'Download' },
+    { id: 'footer', label: 'Contact' }
+  ]
+
+  // Server-side fallback
   if (!isClient) {
     return (
-      <header className="header">
+      <header className="header" ref={headerRef}>
         <div className="container">
           <div className="header-logo">
             <Link href="/">
               <Image 
                 src="/assets/logos/aji-logo.svg" 
-                alt="Aji" 
+                alt="AjiApp" 
                 width={80}
-                height={80}
+                height={45}
                 priority
               />
             </Link>
           </div>
 
-          <nav className="header-nav" role="navigation" aria-label="Navigation principale">
+          <nav className="header-nav">
             <ul>
-              <li><Link href="/#top">Why Aji</Link></li>
-              <li><Link href="/#howitworks">How It Works</Link></li>
-              <li><Link href="/#services">Services</Link></li>
-              <li><Link href="/blog">Blog</Link></li>
-              <li><Link href="/#download">Download</Link></li>
-              <li><Link href="/#footer">Contact</Link></li>
+              {navItems.map((item) => (
+                <li key={item.id}>
+                  {item.isExternal ? (
+                    <Link href={item.href} className="nav-link">
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <Link href={`/#${item.id}`} className="nav-link">
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
             </ul>
           </nav>
 
           <div className="header-cta">
             <Link href="/#download" className="btn">
-              <span>Download App</span>
+              Download App
             </Link>
           </div>
         </div>
@@ -222,123 +213,78 @@ export default function Header() {
 
   return (
     <>
-      <header className={`header ${isScrolled ? 'scrolled' : ''} ${isHeaderVisible ? 'visible' : 'hidden'}`}>
+      <header 
+        className={`header ${isScrolled ? 'scrolled' : ''}`}
+        ref={headerRef}
+      >
         <div className="container">
+          {/* Logo */}
           <div className="header-logo">
             <Link href="/" onClick={closeMobileMenu}>
               <Image 
                 src="/assets/logos/aji-logo.svg" 
-                alt="Aji" 
+                alt="AjiApp" 
                 width={80}
-                height={80}
+                height={45}
                 priority
               />
             </Link>
           </div>
 
+          {/* Mobile Menu Button */}
           <button 
             className={`mobile-menu-button ${mobileMenuOpen ? 'active' : ''}`}
             onClick={toggleMobileMenu}
-            aria-label={mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
+            type="button"
           >
             <span></span>
             <span></span>
             <span></span>
           </button>
 
-          <nav 
-            className={`header-nav ${mobileMenuOpen ? 'mobile-menu-open' : ''}`}
-            role="navigation"
-            aria-label="Navigation principale"
-          >
+          {/* Navigation */}
+          <nav className={`header-nav ${mobileMenuOpen ? 'mobile-menu-open' : ''}`}>
             <ul>
-              <li>
-                <a 
-                  href="#top" 
-                  onClick={(e) => {
-                    e.preventDefault()
-                    smoothScrollTo('top', true)
-                  }}
-                >
-                  Why Aji
-                </a>
-              </li>
-              
-              <li>
-                <a 
-                  href="#howitworks" 
-                  onClick={(e) => {
-                    e.preventDefault()
-                    smoothScrollTo('howitworks')
-                  }}
-                >
-                  How It Works
-                </a>
-              </li>
-              
-              <li>
-                <a 
-                  href="#services" 
-                  onClick={(e) => {
-                    e.preventDefault()
-                    smoothScrollTo('services')
-                  }}
-                >
-                  Services
-                </a>
-              </li>
-              
-              <li>
-                <a 
-                  href="/blog" 
-                  onClick={(e) => handlePageNavigation(e, '/blog')}
-                >
-                  Blog
-                </a>
-              </li>
-              
-              <li>
-                <a 
-                  href="#download" 
-                  onClick={(e) => {
-                    e.preventDefault()
-                    smoothScrollTo('download')
-                  }}
-                >
-                  Download
-                </a>
-              </li>
-              
-              <li>
-                <a 
-                  href="#footer" 
-                  onClick={(e) => {
-                    e.preventDefault()
-                    smoothScrollTo('footer')
-                  }}
-                >
-                  Contact
-                </a>
-              </li>
+              {navItems.map((item) => (
+                <li key={item.id}>
+                  {item.isExternal ? (
+                    <Link 
+                      href={item.href}
+                      onClick={(e) => handlePageNavigation(e, item.href)}
+                      className="nav-link"
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <button 
+                      onClick={() => smoothScrollTo(item.id, item.isTop)}
+                      className="nav-link"
+                      type="button"
+                    >
+                      {item.label}
+                    </button>
+                  )}
+                </li>
+              ))}
             </ul>
           </nav>
 
+          {/* CTA Button */}
           <div className="header-cta">
-            <a 
-              href="#download" 
+            <button 
+              onClick={() => smoothScrollTo('download')}
               className="btn"
-              onClick={(e) => {
-                e.preventDefault()
-                smoothScrollTo('download')
-              }}
+              type="button"
             >
-              <span>Download App</span>
-            </a>
+              Download App
+            </button>
           </div>
         </div>
       </header>
 
+      {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div 
           className="mobile-menu-overlay"

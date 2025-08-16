@@ -1,10 +1,11 @@
-/* WhyAji.css - Transparent background with backdrop image */
+/* WhyAji.css - Version Mobile Corrigée */
 
 .why-aji-section {
   width: 100%;
   padding: 60px 0;
   background: transparent;
   position: relative;
+  overflow-x: hidden;
 }
 
 .why-aji-container {
@@ -59,7 +60,7 @@
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
 }
 
-.why-aji-description {
+.why-aji-subdesc {
   font-size: 1rem;
   font-weight: 400;
   color: #555;
@@ -67,25 +68,21 @@
   margin: 0;
   text-align: center;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+  max-width: 600px;
 }
 
 /* Visual Section */
-.why-aji-visual {
+.phone-images {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.phone-showcase {
-  position: relative;
-  max-width: 400px;
-  width: 100%;
-  margin: 0 auto;
+  margin-top: 2rem;
 }
 
 .phone-image {
   width: 100%;
+  max-width: 400px;
   height: auto;
   display: block;
   filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.2));
@@ -116,11 +113,11 @@
     font-size: 1.6rem;
   }
   
-  .why-aji-description {
+  .why-aji-subdesc {
     font-size: 1.1rem;
   }
   
-  .phone-showcase {
+  .phone-image {
     max-width: 500px;
   }
 }
@@ -143,11 +140,11 @@
     font-size: 1.8rem;
   }
   
-  .why-aji-description {
+  .why-aji-subdesc {
     font-size: 1.2rem;
   }
   
-  .phone-showcase {
+  .phone-image {
     max-width: 600px;
   }
 }
@@ -160,6 +157,7 @@
   
   .why-aji-container {
     gap: 2rem;
+    padding: 0 1rem;
   }
   
   .why-aji-title {
@@ -179,13 +177,14 @@
     text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
   }
   
-  .why-aji-description {
+  .why-aji-subdesc {
     font-size: 0.95rem;
     line-height: 1.5;
     text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+    padding: 0 0.5rem;
   }
   
-  .phone-showcase {
+  .phone-image {
     max-width: 320px;
   }
 }
@@ -202,19 +201,20 @@
   }
   
   .why-aji-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
   
   .why-aji-subtitle {
     font-size: 1.2rem;
   }
   
-  .why-aji-description {
-    font-size: 0.9rem;
+  .why-aji-subdesc {
+    font-size: 1rem;
+    padding: 0;
   }
   
-  .phone-showcase {
-    max-width: 280px;
+  .phone-image {
+    max-width: 500px;
   }
 }
 
@@ -232,52 +232,16 @@
     font-size: 1.1rem;
   }
   
-  .why-aji-description {
+  .why-aji-subdesc {
     font-size: 0.85rem;
   }
   
-  .phone-showcase {
+  .phone-image {
     max-width: 260px;
   }
   
   .why-aji-title::after {
     width: 30px;
-  }
-}
-
-/* High contrast mode */
-@media (prefers-contrast: high) {
-  .why-aji-title {
-    color: #000;
-    text-shadow: 0 0 3px rgba(255, 255, 255, 1);
-  }
-  
-  .why-aji-subtitle {
-    color: #222;
-    text-shadow: 0 0 2px rgba(255, 255, 255, 1);
-  }
-  
-  .why-aji-description {
-    color: #333;
-    text-shadow: 0 0 2px rgba(255, 255, 255, 1);
-  }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .why-aji-title {
-    color: #ffffff;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-  }
-  
-  .why-aji-subtitle {
-    color: #e0e0e0;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  }
-  
-  .why-aji-description {
-    color: #cccccc;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   }
 }
 

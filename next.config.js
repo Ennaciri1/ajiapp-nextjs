@@ -5,7 +5,7 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   
-  // Image optimization
+  // Image optimization simple
   images: {
     remotePatterns: [
       {
@@ -15,13 +15,13 @@ const nextConfig = {
     ],
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384,500, 640, 750, 828, 1080, 1200, 1920, 2048],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   
-  // Webpack configuration
+  // Webpack simple - SUPPRIME CSS LOADER
   webpack: (config, { dev, isServer }) => {
     // Optimizations for development
     if (dev) {
@@ -39,9 +39,10 @@ const nextConfig = {
     return config
   },
   
-  // Experimental features
+  // Experimental features SIMPLIFIÉES
   experimental: {
     optimizePackageImports: ['react-slick', 'slick-carousel'],
+    // SUPPRIME optimizeCss et adjustFontFallbacks
   },
   
   // Compiler options
@@ -51,7 +52,7 @@ const nextConfig = {
     } : false,
   },
   
-  // Security and performance headers
+  // Headers simples
   async headers() {
     return [
       {
@@ -86,6 +87,9 @@ const nextConfig = {
   // Output configuration
   output: 'standalone',
   trailingSlash: false,
+  
+  // Transpile packages
+  transpilePackages: ['react-slick'],
 }
 
 module.exports = nextConfig

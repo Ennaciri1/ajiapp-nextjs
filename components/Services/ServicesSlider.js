@@ -4,14 +4,16 @@ import { useState, useEffect } from 'react'
 import Slider from 'react-slick'
 import Image from 'next/image'
 
-// Import Slick styles
+// Import Slick styles - MÉTHODE CORRIGÉE
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 export default function ServicesSlider() {
   const [windowWidth, setWindowWidth] = useState(0)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     setWindowWidth(window.innerWidth)
     
     const handleResize = () => {
@@ -23,6 +25,11 @@ export default function ServicesSlider() {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
+
+  // Évite erreurs SSR
+  if (!mounted) {
+    return <div>Loading...</div>
+  }
 
   const getSlidesToShow = () => {
     if (windowWidth < 480) return 1
@@ -116,10 +123,6 @@ export default function ServicesSlider() {
       alt: "Your Team"
     }
   ]
-
-  if (windowWidth === 0) {
-    return <div>Loading...</div>
-  }
 
   return (
     <section id="services" className="services-slider-wrapper">

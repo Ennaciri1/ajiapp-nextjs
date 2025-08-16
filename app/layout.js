@@ -33,13 +33,14 @@ export const metadata = {
   },
 }
 
-// Viewport configuration
+// Viewport configuration optimisé
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 5,
+  maximumScale: 3, // Réduit pour éviter les problèmes de zoom
   userScalable: true,
   themeColor: '#8B181A',
+  viewportFit: 'cover', // Pour les devices avec notch
 }
 
 export default function RootLayout({ children }) {
@@ -49,15 +50,36 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        {/* Preload critical CSS pour éviter layout shift */}
+        <link rel="preload" as="style" href="/globals.css" />
+        {/* Meta pour éviter layout shift sur mobile */}
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       </head>
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning className="loading">
+        {/* Wrapper avec classe loading pour éviter flash */}
         <div className="app">
           <Header />
-          <main role="main">{children}</main>
+          <main role="main" className="main-content">
+            {children}
+          </main>
           <Download />
           <Footer />
           <BackToTop />
         </div>
+        
+        {/* Script pour enlever classe loading après hydration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              document.addEventListener('DOMContentLoaded', function() {
+                document.body.classList.remove('loading');
+              });
+            `,
+          }}
+        />
       </body>
     </html>
   )
